@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head><meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"><title>xor_demo</title></head><body style="color: rgb(0, 0, 0);" alink="#ee0000" link="#0000ee" vlink="#551a8b"><big style="font-weight: bold;"><big>XOR Tutorial + Iteration</big><br><br></big>This
+tutorial will guide you through the setup of a simple xor simulation.
+Steps 10 and above also demonstrate how to use an iterator to explore a
+range of values for a single parameter (in this case, random seed).<big style="font-weight: bold;"><br><br></big><big><small>Screenshots were taken on a machine running Windows 7, so the appearance of the GUI may vary if you are using Linux or Mac.</small></big><big style="font-weight: bold;"><br><br>Step 1: Name the script</big><br>Here we will call it "XOR demo". The script name will be used to help organize the raw data.<br><br style="font-style: italic;"><span style="font-style: italic;">Note:
+If you execute the same script multiple times, make sure you use a
+unique script name each time. If you use the same script name, then any
+older data under that name will be overwritten. This warning only
+applies to the raw data storage (the actual .c, .h, and output files
+generated), and NOT to data stored in a database file, which will not
+be overwritten.</span><br><br><div style="text-align: center;"><img style="width: 908px; height: 511px;" alt="" src="xor01.png"><br></div><br><big style="font-weight: bold;">Step 2: Create a run</big><br>Under the "Edit Script Timeline" controls, click "Add Run". This creates a new run object in the script timeline.<br><br><div style="text-align: center;"><img style="width: 908px; height: 511px;" alt="" src="xor02.png"><br></div><br><big style="font-weight: bold;">Step 3: Set run properties</big><br>Click
+on the newly created run in the timeline. Then click the Run Object tab
+that appears at the top. Alternatively, double-clicking the run in the
+timeline will automatically navigate to the Run Object tab.<br><br>The
+Run Object tab has three sub-tabs: Run Properties, Groups and
+Connections, and Events. Start with Run Properties. Here, change the
+run name to "XOR".<br>For simplicity, we can simply use the default
+values for the other parameters. Note that time ticks must match the
+number of ticks specified in the example files. We know our example
+file uses 3 ticks, so there is no need to change the time ticks here.<br><br><div style="text-align: center;"><img style="width: 908px; height: 511px;" alt="" src="xor03.png"><br></div><br><big style="font-weight: bold;">Step 4: Add a group</big><br>Switch to the Groups and Connections sub-tab. Here we will define the network architecture by working with an adjacency matrix.<br><br>Two
+unconnected groups and a Bias are present by default. We will need a
+total of 3 groups, so click "Add Group" to add the third group.<br><br><div style="text-align: center;"><img style="width: 908px; height: 511px;" alt="" src="xor04.png"><br></div><br><big style="font-weight: bold;">Step 5: Set group properties</big><br>We
+will set up each group first before creating connections. Click the
+group named "newGroup1" (click along either the top or the side--it
+doesn't matter). In the Group Properties section below, change the name
+to "Input" and the number of units to 2.<br><br><div style="text-align: center;"><img style="width: 576px; height: 341px;" alt="" src="xor_group1.png"><br></div><br>Do the same for the other groups: "newGroup2" becomes "Hidden" with 10 units, and "newGroup3" becomes "Output" with 1 unit.<br><div style="text-align: center;"><img style="width: 576px; height: 341px;" alt="" src="xor_group2.png"><br></div><hr style="width: 100%; height: 2px;"><div style="text-align: center;"><img style="width: 576px; height: 341px;" alt="" src="xor_group3.png"><br><div style="text-align: left;"><br><big style="font-weight: bold;">Step 6: Connect groups</big><br>Create
+connections between the groups. To toggle a connection between source i
+and destination j, simply click the rectangle in row i, column j.<br><br>We
+can disconnect the connection between Bias and Input, by clicking the
+appropriate place in the grid, although removing this connection won't
+change the outcome of the simulations, since the Input clamp will
+override any bias.<br><br><div style="text-align: center;"><img style="width: 576px; height: 341px;" alt="" src="xor_group4.png"><br><div style="text-align: left;">If
+you have Graphviz installed on your machine, then the "Visualize"
+button will be enabled, and you can use this to double-check the
+network design. It should display something like this:<br><br><div style="text-align: center;"><img style="width: 438px; height: 370px;" alt="" src="xor_netwhole.png"><br><br><div style="text-align: left;"><big style="font-weight: bold;">Step 7: Create event</big><br>If
+we ran the script at this point, nothing would happen because no
+training or test events have been defined. Switch to the Events tab. We
+don't need to worry about multiple phases for this simple demo, so
+ignore the left-hand side. <br><br>Click "Add Train/Test Event" under
+the "defaultPhase timeline" on the right-hand side. The aptly named
+event, "newEvent", contains much of the information about training, so
+our final step is to set this up. To open the tab for "newEvent", click
+it in the timeline, and then click "Edit Selected". Or, alternatively,
+double-click the event in the timeline, and it the GUI will
+automatically navigate to the event's tab.<br><br><div style="text-align: center;"><img style="width: 908px; height: 511px;" alt="" src="xor05.png"><br><br><div style="text-align: left;">Just like with the Run Object tab, the Event tab opens to a general "Properties" sub-tab. <br><br><div style="text-align: center;"><img style="width: 908px; height: 511px;" alt="" src="xor06.png"><br><br><div style="text-align: left;">We already named the script and the run. Do we really need to name this
+event too? Not really. But it's good practice using the GUI to come up
+with a sensible name for everything. When running more complicated
+simulations with multiple events, following a consistent naming
+convention will be very helpful. Here, we can just call this event
+"train event", or use the default name "newEvent". Either option is
+fine.<br><br>Proportion
+can be ignored, because we are not using multiple phases. Likewise, we
+are not using tests in this demo, so we can ignore "Link to test
+set(s)". Since our goal is to train the network, we will set this event
+to "Train" mode (the default). <br><br>Now we need some training
+parameters. To&nbsp;associate this event with a set of parameters, we
+need to "link" it to a training set. However, the dropdown menu is
+empty, as there are currently no training sets that we can link to. In
+the next step, we have to take a detour and create a training set.<br><br><big style="font-weight: bold;">Step 8: Create and link training set</big><br>Along
+the top row of tabs, there is a floating tab at the far right labeled
+"Edit Train/Test Sets". Click to open. This will hide the "Run Object"
+and "Event" tabs that we were working on, but they are only hidden
+temporarily. <br><br><div style="text-align: center;"><img style="width: 908px; height: 511px;" alt="" src="xor07.png"><br><div style="text-align: left;"><br>We
+see that no training sets are defined, so click "New Training Set" to
+create one. To open for editing, click "Edit Selected" or double-click
+the training set in the box. This will open the training set in its own
+window. Unlike the tabs we have been using so far, only one of which
+can be open at a time, you can open as many training set windows as you
+like. That way, you can compare sets of parameters side-by-side. We
+will only be working with one set in this tutorial.<br><br><div style="text-align: center;"><img style="width: 908px; height: 511px;" alt="" src="xor09.png"><br></div><br>We
+are going to make two changes. First, in the "General" category, change
+the "Max iterations" parameter to 10,000. Also, click "Example Set" to
+locate the file "xor.ex" in the file system (it should be in the folder
+MikenetGUI/training_files). Click "Ok" to save the changes.<br><br><div style="text-align: center;"><img style="width: 908px; height: 511px;" alt="" src="xor11.png"><br><br><div style="text-align: left;">You
+can make any other changes that you like. Most of these can be
+overriden by the events that use them, and many can be overriden by
+using an iterator to explore different values. See the main
+documentation for more advanced usage guidelines.<br>&nbsp;<br>To
+navigate back to the Event tab, click the Script Object tab on the far
+left, and follow the "trail" back to the event (ie., open the run, and
+access the event from the "Events" sub-tab of the run).<br><br>When you return to the "Event Properties" tab, you will notice that our event has already been linked to the new training set.<br><br><div style="text-align: center;"><img style="width: 985px; height: 712px;" alt="" src="xor_13.png"><br></div><br><big style="font-weight: bold;">Step 9: Include groups and connections in event</big><br>MikeNet
+is designed to allow sub-networks of large models to be trained
+independently. This flexibility is built-in to the GUI: a training or
+test event can be carried out on a subnetwork of your choosing. In this
+example, we will not use this functionality because we only have three
+groups (see Triangle Model Tutorial for a more complex case). However,
+we will need to manually tell our event to include ALL groups and
+connections. If you happen to omit this step, the GUI will remind you
+before trying to run the script.<br><br>Go to the "Isolate Network Components" sub-tab. It will look like this.<br><br><div style="text-align: center;"><img style="width: 908px; height: 511px;" alt="" src="xor14.png"><br></div><br>Notice
+the parallel between this and the "Groups and Connections" adjacency
+matrix from the Run Object tab. This matrix, however, cannot be edited
+in the same way. It merely reflects the network structure of the run.
+In other words, it provides you with a static version of the matrix
+containing all <span style="font-style: italic;">available</span>
+groups and connections. By default, none of the components are included
+in the event. Toggling whether or not a component is included is as
+easy as clicking that component.<br><br>Included components display as light blue. Click on all groups and connections, and you will see this.<br><br><div style="text-align: center;"><img style="width: 908px; height: 511px;" alt="" src="xor15.png"><br><br><div style="text-align: left;">Connections from the Bias to any other group are automatically included if they exist.</div></div><br>At this point, it is a good idea to make sure the work is saved (go to File-&gt;Save Script or use the equivalent of Ctrl+S).<br><br>If you switch back to the Script Object tab, you should see the following. <br><br><div style="text-align: center;"><img style="width: 908px; height: 511px;" alt="" src="xor16.png"><br><div style="text-align: left;">You can train a single run at this stage by pressing "Start Script" (make sure your preferences are set up first!).<br><br>If you want to use iteration, read on.<br><br><big style="font-weight: bold;">Step 10: Create an iterator</big><br>Adding
+an iterator is done in the same way as adding a run. Click "Add
+Iterator", and the new iterator will show up at the bottom of the
+script timeline.<br><br><div style="text-align: center;"><img style="width: 908px; height: 511px;" alt="" src="xor17.png"> </div></div></div><br>At
+this point, the iterator is not connected to the run in any way. Think
+of the iterator as being a container. We want the run to be inside the
+container so that anything defined on the iterator is automatically
+defined for the run. The method for adding the run to the iterator is
+to simply click the run in the timeline and drag it inside of the
+iterator.<br><br><div style="text-align: center;"><img style="height: 714px; width: 956px;" alt="" src="iterdrag.png"><br></div><br><br></div></div></div></div></div></div></div> </div></div></div></div></div></div></div></body></html>

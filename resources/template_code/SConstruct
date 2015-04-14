@@ -1,0 +1,12 @@
+import os
+MIKENET_DIR = os.path.normpath('/media/data/MikenetGUI/resources/Mikenet-v8.0')
+LIB = 'libmikenet'
+LIBHOME = os.path.join(MIKENET_DIR,'lib')
+INCLUDEHOME = os.path.join(MIKENET_DIR,'include')
+
+Program('mikenet_master.c', 
+			LIBS=LIB, 
+			LIBPATH=LIBHOME,
+			CPPPATH=INCLUDEHOME)
+			
+

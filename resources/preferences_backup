@@ -1,0 +1,106 @@
+<preferences>
+
+	<parameter>
+		variable_name = email_notification;
+		widget_type = checkbox;
+		value = 1;
+		form_name = Send email notification on script completion?;
+		override_flag = 0;
+	</parameter>
+
+	<parameter>
+		variable_name = database_user_name;
+		widget_type = text_field;
+		value = ;
+		form_name = User name;
+		override_flag = 0;
+	</parameter>
+
+	<parameter>
+		variable_name = database_path;
+		widget_type = path;
+		value = None;
+		form_name = Set Database Path;
+		override_flag = 0;
+		comment = Database does not need to exist yet.;
+		extension = *.*;
+	</parameter>
+
+	<parameter>
+		variable_name = build_method;
+		widget_type = dropdown;
+		value = 0;
+		form_name = Build method;
+		override_flag = 0;
+		comment = Choose the method used to build libmikenet.a.;
+		dropdown_options = ['SCons', 'Make'];
+	</parameter>
+
+	<parameter>
+		variable_name = database_host_name;
+		widget_type = text_field;
+		value = localhost;
+		form_name = Host name;
+		override_flag = 0;
+	</parameter>
+
+	<parameter>
+		variable_name = use_database;
+		widget_type = checkbox;
+		value = 1;
+		form_name = Use database to backup data?;
+		override_flag = 0;
+	</parameter>
+
+	<parameter>
+		variable_name = max_cpus;
+		widget_type = text_field;
+		value = ;
+		form_name = Max CPUs (leave blank to use all available);
+		override_flag = 0;
+	</parameter>
+
+	<parameter>
+		variable_name = database_driver;
+		widget_type = dropdown;
+		value = 1;
+		form_name = Database driver;
+		override_flag = 0;
+		dropdown_options = ['PostgreSQL Driver', 'SQLite version 3 or above', 'SQLite version 2', 'MySQL Driver'];
+	</parameter>
+
+	<parameter>
+		variable_name = database_password;
+		widget_type = text_field;
+		value = ;
+		form_name = Password;
+		override_flag = 0;
+		password_flag = 1;
+	</parameter>
+
+	<parameter>
+		variable_name = mikenet_path;
+		widget_type = path;
+		value = C:/Users/Robert/MikenetGUISaturday/MikenetGUI/resources/Mikenet-v8.0;
+		form_name = Set MikeNet Path;
+		override_flag = 0;
+		extension = *.*;
+	</parameter>
+
+	<parameter>
+		variable_name = email_address;
+		widget_type = text_field;
+		value = bopowers9@gmail.com;
+		form_name = Email address for notifications;
+		override_flag = 0;
+	</parameter>
+
+	<parameter>
+		variable_name = multiprocessing;
+		widget_type = checkbox;
+		value = 0;
+		form_name = Use multiple CPUs for simulations (if available)?;
+		override_flag = 0;
+	</parameter>
+
+</preferences>

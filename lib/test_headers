@@ -1,0 +1,6 @@
+word TEXT
+sse REAL
+pronunciation TEXT
+target1 TEXT
+target2 TEXT
+accuracy INT

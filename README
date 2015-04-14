@@ -1,0 +1,59 @@
+Copyright (C) 2013-2014 Robert Powers
+
+This file is part of MikeNetGUI.
+
+MikeNetGUI is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+MikeNetGUI is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with MikeNetGUI.  If not, see <http://www.gnu.org/licenses/>.
+
+----------------------------------------------------------------------------------------------------------
+
+Getting started...
+
+First make sure that you have at least Python 2.7 (so far, the GUI has only been tested on version 2.7, 32 and 64 bit.
+If you use other versions, be aware there may be undiscovered bugs). You also need the following dependencies:
+
+Pyside
+Scipy
+Matplotlib
+Pydot
+Scons (optional -- be sure you have the 'make' command available otherwise)
+Graphviz (optional)
+
+Getting the Enthought Canopy distribution is an easy way to knock out all of those dependencies at once (except Graphviz).
+(https://www.enthought.com/products/canopy/)
+
+Finally, to run simulations you also need the original MikeNet library set up on your system. Even if you already have 
+this, you will need to install the version accompanying MikeNetGUI, as IT HAS BEEN MODIFIED for compatibility reasons.**
+
+In your shell or terminal window, cd into the resources directory of this folder, and run the MikeNet installer program.
+This will set up the modified version of the MikeNet library. To do this, type the following:
+
+python mikenet_installer.py
+
+Follow the instructions, and then you can use the GUI. To open the GUI, use the cd command in your terminal to make sure 
+you are in the MikenetGUI folder. Then type the following command:
+
+./gui.py
+
+This should load the GUI application in a separate Python-owned window. Note, it may be very slow the first time it is
+loaded because it has to import a lot of big libraries.
+
+Refer to the Help documentation (in the doc folder) for details and tutorials.
+
+----------------------------------------------------------------------------------------------------------
+
+
+**Note: It should be perfectly okay to have both your previous build of MikeNet and this new one side-by-side, as
+this one doesn't set or use any environment variables. So they should remain independent. Using your old version
+with the GUI is possible. See the documentation for instructions on how to do this.
+

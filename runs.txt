@@ -1,0 +1,16 @@
+XOR
+XOR
+XOR_3242015
+XOR_3242015_5_iters_1
+XOR_3242015_5_iters_2_1
+XOR_3242015_5_iters_2_2
+XOR_3242015_5_iters_2_3
+XOR_3242015_5_iters_2_4
+XOR_3242015_5_iters_2_5
+newRun1
+newRun1
+throwaway_1
+throwaway_2
+throwaway_3
+throwaway_4
+throwaway_5

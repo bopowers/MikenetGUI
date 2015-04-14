@@ -1,0 +1,4 @@
+noiseData:	runName	testPhase	activation	Input	0.2
+noiseData:	runName	testPhase	input	Hidden	0.44
+noiseData:	runName	testPhase	weight_additive	Hidden	0.421
+noiseData:	runName	testPhase	weight_multiplicative	Output	0.52

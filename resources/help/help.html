@@ -1,0 +1,524 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"><title>MikeNet GUI Help</title>
+
+</head>
+<body>
+<big><big><big><span style="font-weight: bold;"><a name="Top"></a>MikeNet&nbsp;GUI Help</span></big><br style="font-weight: bold;">
+<br style="font-weight: bold;">
+<span style="font-weight: bold;">Contents</span></big></big><br>
+<br>
+<a href="#Getting_started">Getting started</a><br>
+<ul>
+<li><a href="#Dependencies">Dependencies</a></li>
+<li><a href="#Organization">Organization</a></li>
+<li><a href="#Installing_mikenet">Installing
+MikeNet</a></li>
+<li><a href="#Setting_up_preferences">Setting up
+preferences</a></li>
+</ul>
+<a href="#Program_sections">Program sections</a><br>
+<ul>
+<li><a href="#Script_tab">Script tab</a></li>
+<ul>
+<li><a href="#Timeline">Timeline</a></li>
+<li><a href="#Script_name">Script name</a></li>
+<li><a href="#Executing_a_script">Executing a
+script</a></li>
+</ul>
+<li><a href="#Run_tab">Run tab</a></li>
+<ul>
+<li><a href="#Run_properties">Run properties</a></li>
+<li><a href="#Groups_and_connections">Groups and
+connections</a></li>
+<li><a href="#Events">Events</a></li>
+<ul>
+<li><a href="#Interleaving">Interleaving and
+multi-phase control panel</a></li>
+<li><a href="#Phase_timeline_control_panel">Phase
+timeline control panel</a></li>
+</ul>
+</ul>
+<li><a href="#Event_tab">Event tab</a></li>
+<ul>
+<li><a href="#Event_properties">Event properties</a></li>
+<li><a href="#Isolate_net_components">Isolate
+network components</a></li>
+<li><a href="#Setup_activation_recording">Setup
+activation recording</a></li>
+<li><a href="#Noise_control">Noise control</a></li>
+</ul>
+<li><a href="#Iterator_tab">Iterator tab</a></li>
+<li><a href="#Edit_train_test_sets">Edit
+train/test sets</a></li><ul><li><a href="#Example_files">Example files</a></li><li><a href="#Using_training_sets">Using training sets</a></li><li><a href="#Using_test_sets">Using test sets</a></li></ul>
+</ul>
+<a href="#Data_storage">Data storage</a><br>
+<a href="#Data_extractor_tool">Data extractor tool</a><br>
+<a href="#Running_scripts_remotely">Running scripts
+remotely</a><br><br><big><big><span style="font-weight: bold;">Tutorials<br></span></big></big><br><a href="tutorials/xor_demo.html" target="_blank">XOR walk-through</a><br>XOR walk-through (video)<br>Triangle walk-through
+<hr style="width: 100%; height: 2px;"><big style="font-weight: bold;"><a name="Getting_started"></a><big>Getting
+started</big><br>
+</big><br>
+<big><span style="font-weight: bold;"><a name="Dependencies"></a>Dependencies</span></big><br>
+<br>
+MikeNet GUI is a program written in Python, so it is designed to work
+on any operating system where Python is installed. In addition to
+Python, it requires that you have some additional Python modules. The
+following list includes all required and optional dependencies:<br>
+<br>
+<ul>
+<li>Python 2.7 (or higher)*</li>
+<li>PySide</li>
+<li>NumPy</li>
+<li>Matplotlib</li>
+<li>SciPy</li>
+<li>Pydot</li>
+<li>SCons (optional...otherwise, you need to have some version
+of the 'make' utility installed)</li>
+<li>Graphviz (optional, for viewing network diagrams)</li>
+</ul>
+An easy way to get all dependencies simultaneously is to obtain a
+Python distribution such as <a href="https://www.enthought.com/products/canopy/" target="_blank">Canopy</a> by Enthought. Make sure the
+distribution includes the packages listed above.<br>
+<br>
+* MikeNet GUI has not been tested on Python 3. If using version 3, be
+aware there may be bugs.<br>
+<br>
+<a href="help.html#Top">Back to top</a><br>
+<br>
+<big style="font-weight: bold;"><a name="Organization"></a>Organization</big><br>
+<br>
+MikeNet GUI comes in a compressed folder. Unzip the folder. Using your
+shell or terminal window, use the cd command to make MikenetGUI the
+current working directory. You will notice that<br>
+<br>
+<a href="help.html#Top">Back to top</a><br>
+<br>
+<big style="font-weight: bold;"><a name="Installing_mikenet"></a>Installing MikeNet</big><br>
+<br>
+In your shell or terminal window, cd into the resources directory of
+this folder, and run the MikeNet installer program.<br>
+This will set up the modified version* of the MikeNet library. To do
+this, type the following:<br>
+<br>
+<span style="font-style: italic;">python
+mikenet_installer.py</span><br>
+<br>
+Follow the instructions, and then you can use the GUI. To open the GUI,
+use the cd command in your terminal to make sure <br>
+you are in the MikenetGUI folder. Then type the following command:<br>
+<br>
+<span style="font-style: italic;">./gui.py</span><br>
+<br>
+or<br>
+<br>
+<span style="font-style: italic;">python gui.py</span><br>
+<br>
+This should load the GUI application in a separate Python-owned window.
+Note, it may be very slow the first time it is<br>
+loaded because it has to import several heavy libraries.<br><br>*
+The modification is simply the addition of an SConstruct file to allow
+SCons as a build option. None of the original MikeNet libraries have
+been altered.<br>
+<br>
+<a href="help.html#Top">Back to top</a><br>
+<br>
+<big style="font-weight: bold;"><a name="Setting_up_preferences"></a>Setting up
+preferences</big><br>
+<br>
+With the GUI open, you can access some important commands from the main
+menu, located at the top of the screen. Depending on your operating
+system's look and feel, the menu may be part of the application window
+itself, or at the top of the display. If using a Mac, the top menu bar
+may simply say "Python".<br>
+<br>
+You can use the File menu on the menu bar to load and save scripts. For settings that
+are more permanent, there is a preferences menu. Access this menu by
+navigating to File-&gt;Edit Preferences.<br>
+<br>
+<img style="width: 269px; height: 219px;" alt="" src="pref1.png"><br>
+<br>
+The preferences menu is divided into two sections: Application
+Settings, and Database Settings.<br>
+<br>
+<img style="width: 630px; height: 445px;" alt="" src="pref2.png"><br>
+<br>
+<span style="text-decoration: underline;">Application
+Settings</span><br>
+<br>
+If you ran the mikenet_installer <a href="#Installing_mikenet">program</a>,
+then you should see the path to your MikeNet library in the top line.
+On the second line, the build method should reflect the tool you used
+to compile MikeNet. The default is SCons, but Make is allowed as well
+(this includes gmake). Make sure that the build method is the same that
+was used to compile MikeNet, or simulations will not compile properly.<br>
+<br>
+If you choose to not use the mikenet_installer program, and you want to
+use an existing build of MikeNet, then you must set the MikeNet path to
+the desired location. Again, make sure the build method is appropriate
+for your build of MikeNet. If you normally use environment variables,
+or MikeNet is on your system path, you still need to set the path here,
+as the GUI does not search your path or environment when compiling
+simulations. In other words, the GUI has its own way of compiling
+simulations that is totally encapsulated from the rest of your system.
+For this reason, the GUI's installation of MikeNet will not interfere
+with any other installations.<br>
+<br>
+The GUI has support, via Python's multiprocessing module, for multiple
+CPUs. The program does this by "discovering" how many processes are
+available, and spawning that number of asynchronous workers. These
+workers then independently compile and execute runs from a shared queue
+until all runs are complete and all data has been stored. The
+preferences menu allows you to turn this feature off, which would
+result in serial execution of runs (if using Windows, multiprocessing
+has been found to be buggy for this application, so serial mode is
+recommended).<br>
+<br>
+A maximum number of processors can be specified, which is useful if you
+do not want multiprocessing to tie up all available CPUs.<br>
+<br>
+The preferences menu also includes a feature that will inform the user
+via email when scripts have completed. This is optional.<br>
+<br>
+<span style="text-decoration: underline;">Database Settings</span><br>
+<br>
+Data generated from simulations are stored automatically in a "raw"
+form (different files for activation values, test output, weights,
+errors, and metadata). A cleaner method of organization involves the
+use of a relational database. The GUI supports the following SQL
+flavors of database storage: SQLite, MySQL, and PostgreSQL.<br>
+<br>
+In the preferences menu, the database feature can be disabled. If
+enabled, two pieces of information are required: the database path, and
+the driver. <br>
+<br>
+The database path must be specified so that the GUI knows what file to
+store the data in. The path need not exist (especially if setting up
+for the first time). If the database does not exist, the GUI will
+automatically create it when it needs to save data. The driver must be
+among the options listed. The
+driver must match the type of database, and an error will be raised if
+there is a mismatch.<br>
+<br>
+The host name, user name, and password, should be used only if they are
+required to connect to the database. For example, host name for SQLite
+will always be localhost because SQLite cannot be used remotely. If the
+database is secured for certain users, then the appropriate login
+credentials are required.<br>
+<br>
+All preferences are stored in a single file:
+MikenetGUI/resources/preferences. If the GUI cannot load that file, it
+will attempt to load a backup file,
+MikenetGUI/resources/preferences_backup. It is recommended that the
+preferences files be left alone so they are not corrupted. In the event
+that the GUI cannot load either the preferences or the backup, then the
+entire GUI may need to be reinstalled from scratch.<br>
+<br>
+<a href="help.html#Top">Back to top</a><br>
+<hr style="width: 100%; height: 2px;"><big><big style="font-weight: bold;"><a name="Program_sections"></a>Program
+Sections</big></big><br>
+<br>
+The program is divided into "tabs" which allow the user to work with
+one facet of the model at a time. The way that tabs are displayed
+reflects the underlying tree datastructure. The root node of the tree
+is the script, which has its own tab, called the Script Object tab. The
+Script Object tab is always accessible from the top of the display, and
+it is always the farthest to the left. This is essentially the main
+tab, and it is where the script is executed.<br>
+<br>
+As you move from left to right, tabs are associated with elements
+deeper in the tree. The Run Object tab, for instance, would be
+associated with a run, and it would appear one tab to the right (read
+"one-level deeper"). The leaves of the tree correspond to events. There
+are no deeper structures, so the Event tab is the rightmost tab. To
+reduce the number of tabs (especially for large models), the GUI only
+shows tabs that are relevant to the parts of the model being edited.
+This means that only one "path" through the tree is displayed at any
+given time. There may be other tabs that are hidden, and you can always
+return to the Script Object tab and work your way back to whatever part
+of the model you want to edit.<br>
+<br>
+<div style="text-align: center;"><img style="width: 800px; height: 330px;" alt="" src="taborg.png"><br>
+<br>
+<div style="text-align: left;"><a href="#Iterator_tab">Iterator objects</a> also have
+tabs which allow their properties to be edited. In the model tree, iterators are treated as direct descendents of the script node.<br>
+<br>An exception to the above is the<a href="#Edit_train_test_sets"> "Edit Train/Test Sets" tab</a>,
+which is accessible at the top-right of the display. Training and Test
+sets are globally available to the entire script, so they can be seen
+as an extension of the script node. They are set aside on their own tab
+to avoid screen clutter.</div>
+</div>
+<br>
+<big style="font-weight: bold;"><a name="Script_tab"></a>Script
+tab</big><br><br>
+The Script tab (or Script Object tab) is the main tab of the program.
+The most important elements are the timeline, the "Script name" text
+box, and the "Start Script" button.<br><br>
+<div style="text-align: left;"><img style="width: 882px; height: 364px;" alt="" src="script_tab.png"><br>
+</div>
+<a href="help.html#Top">Back to top</a><br>
+<br>
+<style ="font-weight: bold;"></style><a name="Timeline"></a><span style="text-decoration: underline;">Timeline</span><br><br>The
+timeline is where the user can create and order runs, where&nbsp;"run"
+is synonymous with a MikeNet simulation. Here, the user can also create
+and manage iterators for exploration of parameter space. <br><br>Iterators
+can contain nested runs, as well as other iterators. An iterator
+without a run inside it does nothing. An iterator can only be used with
+one run at a time, but any number of iterators can be used for a single
+run.<br><br>The "Edit Script Timeline" controls allow for creation, deletion, and duplication of both runs and iterators.<br><br>In
+the timeline itself, objects are shown within tags
+(&lt;Run&gt;...&lt;/Run&gt; or &lt;Iterator&gt;...&lt;/Iterator&gt;).
+The user can interactively relocate an object by clicking anywhere
+between an object's tags and dragging it. Runs can also be dragged into
+iterators, which will effectively bind the run to the iterator. To
+undo, simply click the run and drag it back outside the tags of the
+iterator.<br><br><div style="text-align: center;"><img style="width: 956px; height: 714px;" alt="" src="iterdrag.png"><br></div><br>
+<a href="help.html#Top">Back to top</a><br>
+<br>
+<big style="font-weight: bold;"><a name="Script_name"></a></big><span style="text-decoration: underline;">Script Name</span><br><br>It is required that each execution of the script be named, and this name is used to help organize any generated data. <br><br>This
+script name is not necessarily the same as the filename of the script.
+For example, you may have a script file called "xor.mnscript". This
+script can be loaded into the GUI any time that you want to use the xor
+model. However, each time you actually execute the script, you will
+want to use a different script name (for instance, you could use the
+date: "xor 06-16-14"), otherwise any previous data under the old script
+name would be overwritten.<br><br>In short, it is always advised to use a unique script name for each new execution of a script.<br><br>
+<a href="help.html#Top">Back to top</a><br>
+<br>
+<big style="font-weight: bold;"><a name="Executing_a_script"></a></big><span style="text-decoration: underline;">Executing a script</span><br>
+<br>The "Start Script" button should only be clicked when all aspects
+of the model are specified correctly, and you are ready to generate
+simulation data. The model cannot be trained interactively; in other
+words you cannot start training, pause, tweak parameters, and then
+resume. Essentially, you must specify everything using the GUI, and the
+"Start Script" button compiles your specifications into code which is
+then executed as a separate application. Of course, you can always
+refine the script and then rerun it with changes if you need to.<br><br>When
+you click "Start Script", the GUI will first check for blatant errors,
+such as missing parameters, bad example files, incorrectly built
+MikeNet, etc. It will not check everything. If it does find an error,
+it will report the source of the error and suggest fixes where
+possible. The GUI will not try to execute a script when errors are
+found.<br><br>If no errors were found but the&nbsp;model seems to
+behave incorrectly, then it is recommended to look at the log file
+which is generated by the simulation. You can find this log file in
+MikenetGUI/data under the appropriate folder. The log file will be
+named after the run you are interested in with an extension of .log.
+The log file can be useful in knowing how far into training your model
+actually went. If unexpected runtime errors occur, they should be
+printed in the log file as well.<br><br>
+<a href="help.html#Top">Back to top</a><br>
+<br>
+<big style="font-weight: bold;"><a name="Run_tab"></a>Run
+tab</big><br><br>The
+Run tab, or Run Object tab, contains all controls relevant to a single
+MikeNet simulation. A script can contain any number of
+runs,&nbsp;though in most cases you will only need one.<br><br>In the simplest case, a run consists of a single training <a href="#Event_tab">event</a> (see the <a href="tutorials/xor_demo.html" target="_blank">XOR tutorial</a>).
+However, a run can have a much more complex organization, with any
+number of child events. If using multiple events, then you can set them
+up to occur either sequentially or in a probabilistic, interleaved
+fashion. Each event can have its own set of parameters, and/or draw
+from its own set of examples.<br><br>The GUI allows for events to be
+grouped into "phases". This is useful in the Triangle Model, for
+instance, where probabilistic interleaving is used to train different
+subnetworks for some number of trials, then the entire network is
+trained on a different set of patterns and tested. The first&nbsp;phase
+of probabilistic interleaving involves four different events (each
+event has its own set of examples and works on different network
+components). The second phase involves only a single event and adds
+testing procedures. Conceptually, all of this occurs as part of a
+single run. <br><br>Some parameters (random seed, bias value, number
+of time ticks...) are defined only at the run-level, and they apply to
+all phases and events that are children of that run.<br><br>The Run tab has three sub-tabs. They are labelled "Run Properties",
+"Groups and Connections", and "Events". These are described in detail
+below.<br><br>
+<a href="help.html#Top">Back to top</a><br>
+<br>
+<big style="font-weight: bold;"><a name="Run_properties"></a>Run
+properties</big><br>
+<br>This tab allows you to edit run-level properties that will apply to all children of the run (phases and events). <br><br>As
+with the script name, it is recommended that you enter a descriptive
+run name. However, the run name does not need to be unique from any
+previous runs you have done. The run name is mainly used to name the
+output files (a run called "xor" will generate a log file named
+"xor.log"). You can also use the run name as a variable when extracting
+data from the database (e.g. if you want all "xor" data).<br><br>Random
+seed, time ticks, weight range (the range for random initialization of
+connections) and bias value are all run-level parameters. All of these,
+with the exception of time ticks, can be overwritten by using an <a href="#Iterator_tab">iterator</a>.
+If you do use an iterator for one of these parameters, then whatever
+values are entered in the run properties tab will be ignored at compile
+time, and the iterator values will be used instead. See the <a href="tutorials/xor_demo.html" target="_blank">XOR tutorial</a> for an example of how to iterate over a range of random seed values.<br><br><img style="width: 224px; height: 150px;" alt="" src="run_properties.png"><br>
+<a href="help.html#Top">Back to top</a><br>
+<br>
+<big style="font-weight: bold;"><a name="Groups_and_connections"></a>Groups and
+connections</big><br>
+<br>The Groups and Connections tab enables the user to design the
+network architecture: the groups (layers) and connections between them.<br><br>To
+create a new group, click "Add Group". To delete, click "Delete Group"
+(only works if a group is selected). To select a group, click the name
+of the group along the top row or the far-left column (it does not
+matter which, because they refer to the same group). When selected, a
+group name will be highlighted. You cannot change or remove the Bias
+group.<br><br><span style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; display: inline ! important; float: none;"><span class="Apple-converted-space">&nbsp;</span>To toggle a connection between source group i and destination j, simply click the rectangle in row i, column j of the matrix.</span>
+An active connection will show up as green, except for connections from
+the Bias, which show up as orange to distinguish them. All groups are
+connected to the Bias by default, but these connections can be removed
+the same way as connections between regular groups.<br><br><img style="width: 579px; height: 368px;" alt="" src="adj_mat.png"><br><br>When a group is selected, then the Group Properties fields become
+active at the bottom of the tab. Here you can name the group, fix the
+number of units, and set the activation function type and error
+computation type. <br><br>Clamps and targets are not applied in the GUI.
+Rather, they must be specified in an external example file according to the
+MikeNet guidelines. A typical example should look like this:<br><br><span style="color: rgb(0, 0, 0); font-family: monospace; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; display: inline ! important; float: none;">TAG Word: dog<span class="Apple-converted-space">&nbsp;</span></span><br style="color: rgb(0, 0, 0); font-family: monospace; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px;"><span style="color: rgb(0, 0, 0); font-family: monospace; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; display: inline ! important; float: none;">PROB 0.2<span class="Apple-converted-space">&nbsp;</span></span><br style="color: rgb(0, 0, 0); font-family: monospace; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px;"><span style="color: rgb(0, 0, 0); font-family: monospace; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; display: inline ! important; float: none;">CLAMP MyInput 0-2 FULL<span class="Apple-converted-space">&nbsp;</span></span><br style="color: rgb(0, 0, 0); font-family: monospace; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px;"><span style="color: rgb(0, 0, 0); font-family: monospace; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; display: inline ! important; float: none;">1 0 1 1 0 0 0 ,<span class="Apple-converted-space">&nbsp;</span></span><br style="color: rgb(0, 0, 0); font-family: monospace; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px;"><span style="color: rgb(0, 0, 0); font-family: monospace; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; display: inline ! important; float: none;">TARGET MyTarget 1-2 FULL<span class="Apple-converted-space">&nbsp;</span></span><br style="color: rgb(0, 0, 0); font-family: monospace; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px;"><span style="color: rgb(0, 0, 0); font-family: monospace; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; display: inline ! important; float: none;">0 0 0 1 1 0 1 ,<span class="Apple-converted-space">&nbsp;</span></span><br style="color: rgb(0, 0, 0); font-family: monospace; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px;"><span style="color: rgb(0, 0, 0); font-family: monospace; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; display: inline ! important; float: none;">;</span><br><br>Given
+this example, notice that you are required to use the GUI to create one
+group with the name "MyInput" and one named "MyTarget". The names of
+the groups must match what is in the example file exactly (names are
+case sensitive). Furthermore, this example file would also require that
+MyInput and MyTarget have 7 units each. You need to be familiar with
+any example files that you are using, and make sure that the name and
+number of units are set accordingly. The GUI may not be able to catch
+these kinds of mistakes. <br><br>More information on proper example formatting can be found <a href="#Example_files">here</a>.<br><br>The
+"Visualize" button may be disabled. If it is, that means Graphviz has
+not been installed on your system. This is an optional feature. If you
+install Graphviz, then you may click this button to generate a simple
+network diagram. This can be helpful in double-checking your work,
+especially with larger networks.<br><br>
+<a href="help.html#Top">Back to top</a><br>
+<br>
+<big style="font-weight: bold;"><a name="Events"></a>Events</big><br><br>The
+"Events" sub-tab is the final editable section when setting up a run.
+Events are really where all the action happens. An event is a set of
+definitions, including (but not limited to) training parameters, ONE
+training example file, and any number of test routines. The event can
+use only a portion of the network, if desired, leaving the rest of the
+network out of the weight-updating algorithms. It can also utilize
+different types of noise. <br><br>A run can have any number of events,
+and these events can be strung together in a sequence (default) or
+organized into multiple phases.&nbsp; This allows for complicated
+behavior including using a combination of probabilistic interleaving
+and sequential event ordering. A single phase will suffice for most
+applications.<br><br>There are two sections of this tab: Interleaving and multi-phase control, and phase timeline control.<br><br>
+<a href="help.html#Top">Back to top</a><br>
+<br>
+<big style="font-weight: bold;"><a name="Interleaving"></a></big><span style="text-decoration: underline;">Interleaving
+and multi-phase control panel</span><br><br>
+<img style="width: 410px; height: 342px;" alt="" src="multi_phase.png"><br><br>By
+default, a single phase, called "defaultPhase" is provided with every
+run. More phases can be added as needed by clicking "Add Phase".<br><br>Click a phase name or index in the window to select that phase. Selecing a phase will also update the <a href="#Phase_timeline_control_panel">phase timeline control panel </a>(on the right-hand side). It is possible to remove phases, but at least one phase is required at all times.<br><br>The phase name can be edited by double-clicking the name.<br><br>The
+Order column can be set to SEQ (sequential order) or PROB
+(probabilistic order). If using SEQ, then all events in that phase's
+timeline will occur in-order. If using PROB, then events in that
+phase's timeline will occur with their respective probabilities
+(probabilities are set in the individual event's <a href="#Event_properties">tab</a>).<br><br>The
+Max Iterations column is only relevant when using PROB order. It sets
+the maximum number of total trials for the phase (where each trial is
+non-deterministically chosen from the distribution of event sampling
+probabilities).<br><br>
+<a href="help.html#Top">Back to top</a><br>
+<br>
+<big style="font-weight: bold;"><a name="Phase_timeline_control_panel"></a></big><span style="text-decoration: underline;">Phase timeline
+control panel</span><br>
+<br><img style="width: 413px; height: 373px;" alt="" src="phase_timeline.png"><br><br>The
+phase timeline is where events are created. If the phase order type is
+SEQ, then order of events matters. You can reorder events in the phase
+timeline by clicking an event and dragging it to its new location. If
+the phase order type is PROB, then the order in the timeline does not
+matter.<br><br>Whether the event mode is TRAIN or TEST is determined by <a href="#Event_properties">editing the event</a>.
+The phase timeline only displays the mode (and the p value, if using
+PROB) to be informative; it does not allow you to directly edit these
+properties.<br><br>To open an event for editing, double-click the
+desired event. Alternatively, select the event by clicking once, and
+then click "Edit Selected". This will navigate to the event's tab.<br><br>When
+an event is removed from the timeline, it is removed permanently.
+Removal of events (or any other data object) is not undoable.<br><br>
+<a href="help.html#Top">Back to top</a><br>
+<br>
+<big style="font-weight: bold;"><a name="Event_tab"></a>Event
+tab</big><br><br>
+...<br>
+<a href="help.html#Top">Back to top</a><br>
+<br>
+<big style="font-weight: bold;"><a name="Event_properties"></a>Event properties</big><br><br><img style="width: 366px; height: 373px;" alt="" src="event_properties.png"><br>The event properties sub-tab enables the main features of the event to be defined. <br><br>The event name is an optional descriptive tag for an event.<br><br>The
+proportion value is used only if the event is part of a phase of order
+type PROB. It represents the probability that this event will be used
+for any given trial. All event proportions within a phase must add to 1.<br><br>The
+event can be linked to any number of test sets. Clicking "Add Link"
+will bring up a menu of all available test sets. For more on how to
+create a test set, see <a href="#Using_test_sets">Using test sets</a>. <br><br>If
+the mode is TEST, then this event will not include any training.
+Instead, all test sets that have been linked to the event will be
+carried out. If the mode is TRAIN, then testing can still be done
+intermittently throughout training. The frequency of testing, in this
+case, is specified by the "test interval" parameter in the event's
+training set.<br><br>Finally, if the mode is TRAIN, then the event will
+need to be linked to a single training set. Available training sets are
+listed in the dropdown. Read more about creating training sets <a href="#Using_training_sets">here</a>.<br><br>Once
+linked to a training set, all overridable parameters are displayed in a
+box to the right. This allows you to create only a single training set,
+and to override parameters specific to an event when needed. Why would
+this be useful? Consider a run where you want to start with a high
+learning rate, and then switch to a low learning rate after 1000
+trials. All other parameters will be the same. This could be
+accomplished by having two events. The two events are both linked to
+the same training set, so all parameters are the same. However, you can
+override the learning rate in the first event and set it to the desired
+higher value. You can also override the max iterations value of the
+first event to be 1000, so the second event will start after 1000
+trials.<br><br><img style="width: 935px; height: 512px;" alt="" src="event_properties_op.png"><br><br>
+<a href="help.html#Top">Back to top</a><br>
+<br>
+<big style="font-weight: bold;"><a name="Isolate_net_components"></a>Isolate network
+components</big><br><br>
+&nbsp;<span style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; display: inline ! important; float: none;">MikeNet
+is designed to allow sub-networks of large models to be trained
+independently. This flexibility is built-in to the GUI: a training or
+test event can be carried out on a subnetwork of your choosing.<span class="Apple-converted-space"> </span></span>The "Isolate Network Components" sub-tab uses an adjacency matrix much like in the<a href="#Groups_and_connections"> run tab</a>.
+However, groups and connections cannot be added or removed from this
+matrix in the same way. The matrix only displays the available groups
+and connections for this run, and you can choose which components will
+be included in this event.<br><br>Two examples are shown side-by-side
+below. Both involve the same network structure (a simple one, with two
+groups, and one connection). In the image on the left, only "newGroup1"
+has been included in the event, which we can tell because it is the
+only one highlighted. In the image on the right, both groups are now
+included, as well as the connection from "newGroup1" to "newGroup2".<br><br><img style="width: 668px; height: 129px;" alt="" src="isolate.png"><br>
+<a href="help.html#Top">Back to top</a><br>
+<br>
+<big style="font-weight: bold;"><a name="Setup_activation_recording"></a>Setup activation
+recording</big><br>
+...<br>
+<a href="help.html#Top">Back to top</a><br>
+<br>
+<big style="font-weight: bold;"><a name="Noise_control"></a>Noise
+control</big><br>
+...<br>
+<a href="help.html#Top">Back to top</a><br>
+<br>
+<big style="font-weight: bold;"><a name="Iterator_tab"></a>Iterator
+tab</big><br>
+...<br>
+<a href="help.html#Top">Back to top</a><br>
+<br>
+<big style="font-weight: bold;"><a name="Edit_train_test_sets"></a>Edit train/test sets</big><br>
+...<br>
+<a href="help.html#Top">Back to top</a><br><br><big style="font-weight: bold;"><a name="Example_files"></a>Example files</big><br>
+...<br>
+<a href="help.html#Top">Back to top</a><br><br><big style="font-weight: bold;"><a name="Using_training_sets"></a>Using training sets</big><br>
+...<br>
+<a href="help.html#Top">Back to top</a><br><br><big style="font-weight: bold;"><a name="Using_test_sets"></a>Using test sets</big><br>
+...<br>
+<a href="help.html#Top">Back to top</a><br>
+<hr style="width: 100%; height: 2px;"><big style="font-weight: bold;"><a name="Data_storage"></a>Data
+storage</big><br>
+...<br>
+<a href="help.html#Top">Back to top</a><br>
+<br>
+<big style="font-weight: bold;"><a name="Data_extractor_tool"></a>Data extractor tool</big><br>
+...<br>
+<a href="help.html#Top">Back to top</a><br>
+<br>
+<big style="font-weight: bold;"><a name="Running_scripts_remotely"></a>Running scripts
+remotely</big><br>
+...<br>
+<a href="help.html#Top">Back to top</a><br>
+</body></html>

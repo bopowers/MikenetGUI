@@ -1,0 +1,535 @@
+<script>
+
+	&default& = {'widget_type': 'int_spinbox', 'form_name': 'Time ticks', 'value': 3, 'variable_name': 'ticks'}
+	&default& = {'step': 1, 'value': 1, 'widget_type': 'int_spinbox', 'range': [0, 999999999], 'variable_name': 'seed', 'form_name': 'Random seed'}
+	&default& = {'step': 0.01, 'value': 0.1, 'widget_type': 'dbl_spinbox', 'range': [0, 10], 'variable_name': 'weight_range', 'form_name': 'Weight range'}
+	&default& = {'step': 0.01, 'value': 1.0, 'widget_type': 'dbl_spinbox', 'range': [-10, 10], 'variable_name': 'bias_value', 'form_name': 'Bias value'}
+	&default& = {'category': 'General', 'widget_type': 'dbl_spinbox', 'range': [0, 10], 'variable_name': 'epsilon', 'override_flag': 1, 'form_name': 'Epsilon', 'decimals': 3, 'step': 0.001, 'value': 1.0}
+	&default& = {'category': 'General', 'widget_type': 'dbl_spinbox', 'range': [0, 1], 'variable_name': 'momentum', 'override_flag': 1, 'form_name': 'Momentum', 'decimals': 3, 'step': 0.001, 'value': 0.0}
+	&default& = {'category': 'General', 'widget_type': 'dbl_spinbox', 'range': [0, 10], 'variable_name': 'tolerance', 'override_flag': 1, 'form_name': 'Tolerance', 'decimals': 3, 'step': 0.001, 'value': 0.1}
+	&default& = {'category': 'General', 'widget_type': 'dbl_spinbox', 'range': [0, 10], 'variable_name': 'error_radius', 'override_flag': 1, 'form_name': 'Error radius', 'decimals': 3, 'step': 0.001, 'value': 0.0}
+	&default& = {'category': 'General', 'widget_type': 'int_spinbox', 'range': [1, 1000000000], 'variable_name': 'max_iterations', 'override_flag': 1, 'form_name': 'Max iterations', 'step': 100, 'value': 1000}
+	&default& = {'category': 'General', 'dropdown_options': ['BATCH', 'ONLINE'], 'value': 0, 'widget_type': 'dropdown', 'variable_name': 'training_mode', 'override_flag': 1, 'form_name': 'Training mode'}
+	&default& = {'category': 'General', 'value': 0, 'widget_type': 'checkbox', 'variable_name': 'dbd', 'override_flag': 1, 'form_name': 'Use dbd?'}
+	&default& = {'category': 'General', 'dropdown_options': ['BPTT', 'CRBP'], 'value': 0, 'widget_type': 'dropdown', 'variable_name': 'training_algorithm', 'override_flag': 1, 'form_name': 'Algorithm'}
+	&default& = {'category': 'General', 'value': 1, 'widget_type': 'checkbox', 'variable_name': 'reset_activation', 'override_flag': 1, 'form_name': 'Reset activation each trial?'}
+	&default& = {'category': 'General', 'dropdown_options': ['MAX_ITER', 'MAX_ITER_OR_THRESH', 'THRESHOLD'], 'value': 0, 'widget_type': 'dropdown', 'variable_name': 'stop_criterion', 'override_flag': 1, 'form_name': 'Stop criterion'}
+	&default& = {'category': 'Timing', 'widget_type': 'dbl_spinbox', 'range': [0, 60], 'variable_name': 'seconds', 'override_flag': 1, 'form_name': 'Seconds', 'decimals': 1, 'step': 0.1, 'value': 1.0}
+	&default& = {'category': 'Timing', 'value': 0, 'widget_type': 'checkbox', 'variable_name': 'tai', 'override_flag': 1, 'form_name': 'Time average input?'}
+	&default& = {'category': 'Timing', 'value': 0, 'widget_type': 'checkbox', 'variable_name': 'error_ramp', 'override_flag': 1, 'form_name': 'Ramp error?'}
+	&default& = {'category': 'Timing', 'widget_type': 'dbl_spinbox', 'range': [-1, 1], 'variable_name': 'tao', 'override_flag': 1, 'form_name': 'Time average output', 'decimals': 3, 'step': 0.001, 'value': 1.0}
+	&default& = {'category': 'Timing', 'widget_type': 'dbl_spinbox', 'range': [-1, 1], 'value': -1.0, 'variable_name': 'tao_max_mult', 'override_flag': 1, 'form_name': 'Tao max multiplier', 'decimals': 3, 'step': 0.001, 'comment': '-1 means use 1/net->integrationConstant'}
+	&default& = {'category': 'Timing', 'widget_type': 'dbl_spinbox', 'range': [-1, 1], 'variable_name': 'tao_min_mult', 'override_flag': 1, 'form_name': 'Tao min multiplier', 'decimals': 3, 'step': 0.001, 'value': 0.001}
+	&default& = {'category': 'Timing', 'widget_type': 'dbl_spinbox', 'range': [0, 10], 'variable_name': 'tao_epsilon', 'override_flag': 1, 'form_name': 'Tao epsilon', 'decimals': 3, 'step': 0.001, 'value': 0.0}
+	&default& = {'category': 'Timing', 'widget_type': 'dbl_spinbox', 'range': [0, 10], 'variable_name': 'tao_decay', 'override_flag': 1, 'form_name': 'Tao decay', 'decimals': 3, 'step': 0.001, 'value': 0.0}
+	&default& = {'category': 'Output', 'value': 0, 'widget_type': 'checkbox', 'variable_name': 'will_save_weights', 'override_flag': 1, 'form_name': 'Save weights?'}
+	&default& = {'category': 'Output', 'widget_type': 'int_spinbox', 'range': [1, 1000000], 'variable_name': 'save_weights_interval', 'override_flag': 1, 'form_name': 'Save weights interval', 'step': 100, 'value': 500}
+	&default& = {'category': 'Output', 'value': 1, 'widget_type': 'checkbox', 'variable_name': 'will_save_error', 'override_flag': 1, 'form_name': 'Save error log?'}
+	&default& = {'category': 'Output', 'widget_type': 'int_spinbox', 'range': [1, 1000000], 'variable_name': 'save_error_interval', 'override_flag': 1, 'form_name': 'Save error interval', 'step': 100, 'value': 500}
+	&default& = {'category': 'Output', 'value': 0, 'widget_type': 'checkbox', 'variable_name': 'will_save_activations', 'override_flag': 1, 'form_name': 'Save unit activations?'}
+	&default& = {'category': 'Output', 'widget_type': 'int_spinbox', 'range': [1, 1000000], 'variable_name': 'save_activations_interval', 'override_flag': 1, 'form_name': 'Save activations interval', 'step': 100, 'value': 500}
+	&default& = {'category': 'Output', 'widget_type': 'int_spinbox', 'range': [1, 1000000], 'variable_name': 'test_interval', 'override_flag': 1, 'form_name': 'Test interval', 'step': 100, 'value': 500}
+	<parameter>
+		variable_name = script_name;
+		widget_type = text_field;
+		value = Reed_XOR_5iter_3232015;
+		form_name = Script name;
+		override_flag = 0;
+	</parameter>
+
+	<training_profile>
+
+		category_labels = ['General', 'Timing', 'Output']
+		<parameter>
+			variable_name = profile_name;
+			widget_type = text_field;
+			value = TrainingSet1;
+			form_name = Profile Name;
+			override_flag = 0;
+			category = General;
+		</parameter>
+
+		<parameter>
+			variable_name = example_path;
+			widget_type = path;
+			value = /media/data/MikenetGUI/training_files/xor.ex;
+			form_name = Example Set;
+			override_flag = 1;
+			category = General;
+			override_flag = 1;
+			extension = *.*;
+		</parameter>
+
+		<parameter>
+			variable_name = epsilon;
+			widget_type = dbl_spinbox;
+			value = 1.0;
+			form_name = Epsilon;
+			override_flag = 1;
+			step = 0.001;
+			decimals = 3;
+			category = General;
+			override_flag = 1;
+		</parameter>
+
+		<parameter>
+			variable_name = momentum;
+			widget_type = dbl_spinbox;
+			value = 0.0;
+			form_name = Momentum;
+			override_flag = 1;
+			step = 0.001;
+			decimals = 3;
+			category = General;
+			override_flag = 1;
+		</parameter>
+
+		<parameter>
+			variable_name = tolerance;
+			widget_type = dbl_spinbox;
+			value = 0.1;
+			form_name = Tolerance;
+			override_flag = 1;
+			step = 0.001;
+			decimals = 3;
+			category = General;
+			override_flag = 1;
+		</parameter>
+
+		<parameter>
+			variable_name = error_radius;
+			widget_type = dbl_spinbox;
+			value = 0.0;
+			form_name = Error radius;
+			override_flag = 1;
+			step = 0.001;
+			decimals = 3;
+			category = General;
+			override_flag = 1;
+		</parameter>
+
+		<parameter>
+			variable_name = max_iterations;
+			widget_type = int_spinbox;
+			value = 10000;
+			form_name = Max iterations;
+			override_flag = 1;
+			range = [1,1000000000];
+			step = 100;
+			category = General;
+			override_flag = 1;
+		</parameter>
+
+		<parameter>
+			variable_name = training_mode;
+			widget_type = dropdown;
+			value = 0;
+			form_name = Training mode;
+			override_flag = 1;
+			category = General;
+			dropdown_options = ['BATCH', 'ONLINE'];
+			override_flag = 1;
+		</parameter>
+
+		<parameter>
+			variable_name = dbd;
+			widget_type = checkbox;
+			value = 0;
+			form_name = Use dbd?;
+			override_flag = 1;
+			category = General;
+			override_flag = 1;
+		</parameter>
+
+		<parameter>
+			variable_name = training_algorithm;
+			widget_type = dropdown;
+			value = 0;
+			form_name = Algorithm;
+			override_flag = 1;
+			category = General;
+			dropdown_options = ['BPTT', 'CRBP'];
+			override_flag = 1;
+		</parameter>
+
+		<parameter>
+			variable_name = reset_activation;
+			widget_type = checkbox;
+			value = 1;
+			form_name = Reset activation each trial?;
+			override_flag = 1;
+			category = General;
+			override_flag = 1;
+		</parameter>
+
+		<parameter>
+			variable_name = stop_criterion;
+			widget_type = dropdown;
+			value = 0;
+			form_name = Stop criterion;
+			override_flag = 1;
+			category = General;
+			dropdown_options = ['MAX_ITER', 'MAX_ITER_OR_THRESH', 'THRESHOLD'];
+			override_flag = 1;
+		</parameter>
+
+		<parameter>
+			variable_name = seconds;
+			widget_type = dbl_spinbox;
+			value = 1.0;
+			form_name = Seconds;
+			override_flag = 1;
+			step = 0.1;
+			decimals = 1;
+			category = Timing;
+			override_flag = 1;
+		</parameter>
+
+		<parameter>
+			variable_name = tai;
+			widget_type = checkbox;
+			value = 0;
+			form_name = Time average input?;
+			override_flag = 1;
+			category = Timing;
+			override_flag = 1;
+		</parameter>
+
+		<parameter>
+			variable_name = error_ramp;
+			widget_type = checkbox;
+			value = 0;
+			form_name = Ramp error?;
+			override_flag = 1;
+			category = Timing;
+			override_flag = 1;
+		</parameter>
+
+		<parameter>
+			variable_name = tao;
+			widget_type = dbl_spinbox;
+			value = 1.0;
+			form_name = Time average output;
+			override_flag = 1;
+			range = [-1,1];
+			step = 0.001;
+			decimals = 3;
+			category = Timing;
+			override_flag = 1;
+		</parameter>
+
+		<parameter>
+			variable_name = tao_max_mult;
+			widget_type = dbl_spinbox;
+			value = -1.0;
+			form_name = Tao max multiplier;
+			override_flag = 1;
+			comment = -1 means use 1/net->integrationConstant;
+			range = [-1,1];
+			step = 0.001;
+			decimals = 3;
+			category = Timing;
+			override_flag = 1;
+		</parameter>
+
+		<parameter>
+			variable_name = tao_min_mult;
+			widget_type = dbl_spinbox;
+			value = 0.001;
+			form_name = Tao min multiplier;
+			override_flag = 1;
+			range = [-1,1];
+			step = 0.001;
+			decimals = 3;
+			category = Timing;
+			override_flag = 1;
+		</parameter>
+
+		<parameter>
+			variable_name = tao_epsilon;
+			widget_type = dbl_spinbox;
+			value = 0.0;
+			form_name = Tao epsilon;
+			override_flag = 1;
+			step = 0.001;
+			decimals = 3;
+			category = Timing;
+			override_flag = 1;
+		</parameter>
+
+		<parameter>
+			variable_name = tao_decay;
+			widget_type = dbl_spinbox;
+			value = 0.0;
+			form_name = Tao decay;
+			override_flag = 1;
+			step = 0.001;
+			decimals = 3;
+			category = Timing;
+			override_flag = 1;
+		</parameter>
+
+		<parameter>
+			variable_name = will_save_weights;
+			widget_type = checkbox;
+			value = 0;
+			form_name = Save weights?;
+			override_flag = 1;
+			category = Output;
+			override_flag = 1;
+		</parameter>
+
+		<parameter>
+			variable_name = save_weights_interval;
+			widget_type = int_spinbox;
+			value = 500;
+			form_name = Save weights interval;
+			override_flag = 1;
+			range = [1,1000000];
+			step = 100;
+			category = Output;
+			override_flag = 1;
+		</parameter>
+
+		<parameter>
+			variable_name = will_save_error;
+			widget_type = checkbox;
+			value = 1;
+			form_name = Save error log?;
+			override_flag = 1;
+			category = Output;
+			override_flag = 1;
+		</parameter>
+
+		<parameter>
+			variable_name = save_error_interval;
+			widget_type = int_spinbox;
+			value = 500;
+			form_name = Save error interval;
+			override_flag = 1;
+			range = [1,1000000];
+			step = 100;
+			category = Output;
+			override_flag = 1;
+		</parameter>
+
+		<parameter>
+			variable_name = will_save_activations;
+			widget_type = checkbox;
+			value = 0;
+			form_name = Save unit activations?;
+			override_flag = 1;
+			category = Output;
+			override_flag = 1;
+		</parameter>
+
+		<parameter>
+			variable_name = save_activations_interval;
+			widget_type = int_spinbox;
+			value = 500;
+			form_name = Save activations interval;
+			override_flag = 1;
+			range = [1,1000000];
+			step = 100;
+			category = Output;
+			override_flag = 1;
+		</parameter>
+
+		<parameter>
+			variable_name = test_interval;
+			widget_type = int_spinbox;
+			value = 500;
+			form_name = Test interval;
+			override_flag = 1;
+			range = [1,1000000];
+			step = 100;
+			category = Output;
+			override_flag = 1;
+		</parameter>
+
+	</training_profile>
+
+	<iterator>
+
+		random_flag = None
+
+		applied_paths = ALL
+
+		<varying_parameter>
+			variable_name = seed;
+			widget_type = int_spinbox;
+			value = 1;
+			form_name = Random seed;
+			override_flag = 0;
+			step = 1;
+		</varying_parameter>
+
+		<parameter>
+			variable_name = iterator_name;
+			widget_type = text_field;
+			value = newIterator1;
+			form_name = Iterator name;
+			override_flag = 0;
+		</parameter>
+
+		<parameter>
+			variable_name = delta;
+			widget_type = int_spinbox;
+			value = 0;
+			form_name = Change by how much each time?;
+			override_flag = 0;
+			range = [-1000000,1000000];
+			step = 1;
+			decimals = 3;
+		</parameter>
+
+		<parameter>
+			variable_name = repeat;
+			widget_type = int_spinbox;
+			value = 5;
+			form_name = How many iterations?;
+			override_flag = 0;
+			range = [1,10000];
+			step = 1;
+		</parameter>
+
+		<parameter>
+			variable_name = initial_value;
+			widget_type = int_spinbox;
+			value = 0;
+			form_name = Initial value;
+			override_flag = 0;
+			step = 1;
+			decimals = 3;
+		</parameter>
+
+		<parameter>
+			variable_name = varying;
+			widget_type = dropdown;
+			value = 26;
+			form_name = Parameter to vary;
+			override_flag = 0;
+			dropdown_options = ['', 'Epsilon', 'Momentum', 'Tolerance', 'Error radius', 'Max iterations', 'Seconds', 'Time average output', 'Tao max multiplier', 'Tao min multiplier', 'Tao epsilon', 'Tao decay', 'Save weights interval', 'Save error interval', 'Save activations interval', 'Test interval', 'Activation noise on Input', 'Input noise on Input', 'Activation noise on Hidden', 'Input noise on Hidden', 'Activation noise on Output', 'Input noise on Output', 'Weight noise (additive) on Input->Hidden', 'Weight noise (additive) on Hidden->Output', 'Weight noise (multiplicative) on Input->Hidden', 'Weight noise (multiplicative) on Hidden->Output', 'Random seed', 'Bias value', 'Weight range', 'Number of hidden units'];
+		</parameter>
+
+		<run>
+
+			groups = [{'units': 2, 'activation_type': 'LOGISTIC_ACTIVATION', 'error_computation_type': 'SUM_SQUARED_ERROR', 'name': u'Input'}, {'units': 10, 'activation_type': 'LOGISTIC_ACTIVATION', 'error_computation_type': 'SUM_SQUARED_ERROR', 'name': u'Hidden'}, {'units': 1, 'activation_type': 'LOGISTIC_ACTIVATION', 'error_computation_type': 'SUM_SQUARED_ERROR', 'name': u'Output'}]
+			matrix = [[0, 1, 0], [0, 0, 1], [0, 0, 0], [0, 1, 1]]
+			<parameter>
+				variable_name = bias_value;
+				widget_type = dbl_spinbox;
+				value = 1.0;
+				form_name = Bias value;
+				override_flag = 0;
+				range = [-10,10];
+				step = 0.01;
+			</parameter>
+
+			<parameter>
+				variable_name = weight_range;
+				widget_type = dbl_spinbox;
+				value = 0.1;
+				form_name = Weight range;
+				override_flag = 0;
+				step = 0.01;
+			</parameter>
+
+			<parameter>
+				variable_name = seed;
+				widget_type = int_spinbox;
+				value = 1;
+				form_name = Random seed;
+				override_flag = 0;
+				step = 1;
+			</parameter>
+
+			<parameter>
+				variable_name = ticks;
+				widget_type = int_spinbox;
+				value = 3;
+				form_name = Time ticks;
+				override_flag = 0;
+			</parameter>
+
+			<parameter>
+				variable_name = run_name;
+				widget_type = text_field;
+				value = XOR;
+				form_name = Run name;
+				override_flag = 0;
+			</parameter>
+
+			<phase>
+
+				<parameter>
+					variable_name = phase_name;
+					widget_type = text_field;
+					value = defaultPhase;
+					form_name = Phase name;
+					override_flag = 0;
+				</parameter>
+
+				<parameter>
+					variable_name = phase_order;
+					widget_type = dropdown;
+					value = 0;
+					form_name = Phase order;
+					override_flag = 0;
+					dropdown_options = ['SEQ', 'PROB'];
+				</parameter>
+
+				<parameter>
+					variable_name = max_iterations;
+					widget_type = int_spinbox;
+					value = 1000;
+					form_name = Max iterations;
+					override_flag = 0;
+					range = [1,1000000000];
+					step = 100;
+				</parameter>
+
+				<phase_item>
+
+					my_profile = TrainingSet1
+					mode = TRAIN
+					test_profiles = []
+
+					<parameter>
+						variable_name = item_name;
+						widget_type = text_field;
+						value = train event;
+						form_name = Event Name;
+						override_flag = 0;
+					</parameter>
+
+					<parameter>
+						variable_name = probability;
+						widget_type = dbl_spinbox;
+						value = 0.0;
+						form_name = Proportion;
+						override_flag = 0;
+						comment = (if phase order type is PROB);
+						step = 0.05;
+						decimals = 2;
+					</parameter>
+
+
+					<overrides>
+					</overrides>
+
+					recording_data = {}
+
+					net_components = {'connections': [u'Input%Hidden', u'Hidden%Output'], 'groups': [u'Input', u'Hidden', u'Output']}
+
+					noise_data = {'activation_noise': {}, 'input_noise': {}, 'weight_noise': {}}
+
+				</phase_item>
+
+			</phase>
+
+		</run>
+
+	</iterator>
+
+</script>
